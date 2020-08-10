@@ -43,6 +43,7 @@ function getMoreReList (data) {
 }
 
 export const getReList = (params) => dispatch => {
+    console.log('params', params)
     return post('api/dd/v2/topic/list', params).then(res => {
         if (res.status === 200) {
             let data = res.data.root

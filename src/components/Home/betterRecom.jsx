@@ -5,6 +5,7 @@ import BScroll from 'better-scroll'
 import '../../static/css/recommond.less'
 import { getReList, clickPraise, getRecommList } from './store/actionCreaters'
 import { changeLoading } from '../../store/loadingReaducer'
+import Loading from '../../common/loading'
 
 let scroll = null
 
@@ -14,7 +15,7 @@ let scroll = null
     {getReList, clickPraise, getRecommList, changeLoading}
 )
 
-class Recommond extends React.PureComponent{
+class BeRecommond extends React.PureComponent{
     constructor(props){
         super(props)
         this.state = ({
@@ -36,6 +37,7 @@ class Recommond extends React.PureComponent{
                 pageNumber: data.pageNumber
             })
         } else {
+            this.props.changeLoading(true)
             this.props.getReList(this.state.search).then((res) => {
                 this.props.changeLoading(false)
             })
@@ -147,12 +149,13 @@ class Recommond extends React.PureComponent{
 
     render () {
         const { recomList } = this.props.Home
+        const { loading } = this.props.loadingReducer
       
         return(
             // <div className="recom" id="recList" ref={c => this.scrollheight = c} onScrollCapture={() => this.handleScrolll()}>
             
             <div className="recom" id="recList" ref={(scroll) => {this.refScroll = scroll}}>
-                <ul>
+                {loading ? <Loading />  : <ul>
                     {/*!loading ? <div className="down" ref="downRefresh">下拉刷新</div> : <Loading />*/}
                     <div className="down" ref="downRefresh">下拉刷新</div>
                     { recomList ? recomList.map((item, index) => {
@@ -214,10 +217,10 @@ class Recommond extends React.PureComponent{
                         )
                     }) : null}
                     <div className="no-more" ref="upLoadMore">上拉加载更多...</div>
-                </ul> 
+                </ul> }
             </div>
         )
     }
 }
     
-export default Recommond
+export default BeRecommond

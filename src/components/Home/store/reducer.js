@@ -24,7 +24,6 @@ export function Home(state = defaultState, action) {
         case actionType.CLEAR_DERTAIL_INFO:
             return { ...state, recomDetail: '', comment: '' }
         case actionType.CLICK_PRAISE:
-            console.log('action', action)
             return {...state , recomList: action.data.list, recomDetail: action.data.detail}
         default :
             return state;

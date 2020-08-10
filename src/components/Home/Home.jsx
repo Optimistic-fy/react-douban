@@ -7,7 +7,6 @@ import '../../static/css/Home.less'
 import WriteSwiper from './swpier'
 import { Tabs, Badge } from 'antd-mobile'
 import PreView from './preView'
-import Loading from '../../common/loading'
 import Recommond from './recommond'
 import BetterRecom from './betterRecom'
 import AntdRecom from './antdRecom'
@@ -48,7 +47,6 @@ class Home extends React.PureComponent{
    
     render () {
         const { showPre, imgList, imgIndex } = this.state
-        const { loading } = this.props.loadingReducer
 
         return (
             <div className="home">
@@ -67,7 +65,7 @@ class Home extends React.PureComponent{
                         <div style={{ height: '100%', position: 'relative'}}>
                             {/*<Recommond parent={this} />*/}
                             {/* better-scroll */}
-                            {loading ? <Loading /> : <BetterRecom parent={this} />}
+                            <BetterRecom parent={this} />
                             {/* antd-mobile */}
                             {/*<AntdRecom parent={this} />*/}
                         </div>
